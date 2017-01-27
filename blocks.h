@@ -5,5 +5,6 @@
 
 void reset_input(cstate &s);
 void eclk(cstate &s);
+void eu_timing(cstate &s);
 
 #endif

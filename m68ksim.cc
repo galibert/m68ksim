@@ -13,6 +13,8 @@ void init(cstate &s)
   memset(&s, 0, sizeof(s));
   ref = s;
   s.first = true;
+
+  s.bus_delay = true;
 }
 
 void update(cstate &s)
@@ -31,9 +33,11 @@ void update(cstate &s)
 
 void show_state(const cstate &s)
 {
-  printf("%8lld: clk=%d iclk=%d e=%d halto=%d reseto=%d internal_reset=%d\n",
-	 s.ctime, s.clk, s.iclk, s.p_e,
-	 s.halto, s.reseto, s.internal_reset);
+  printf("%8ld: clk=%d iclk=%d i_reset=%d eu_prw=%c%c%c rpcg=%c%c\n",
+	 s.ctime, s.clk, s.iclk,
+	 s.internal_reset,
+	 s.eu_p ? 'p' : '-', s.eu_r ? 'r' : '-', s.eu_w ? 'w' : '-',
+	 s.romarray_precharge ? 'p' : '-', s.romarray_clear ? 'c' : '-');
 }
 
 void step(cstate &s, bool verbose)
@@ -90,7 +94,7 @@ int main()
   s.p_reset = false;
   s.p_halt = false;
 
-  for(int i=0; i<10; i++)
+  for(int i=0; i<5; i++)
     step(s, true);
 
   s.p_reset = true;

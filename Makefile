@@ -3,8 +3,8 @@ ALLLIB =
 DEPLIB = 
 
 PROG = m68ksim
-OBJS = m68ksim.o blocks.o sched.o
-SRCS = m68ksim.cc blocks.cc sched.cc
+OBJS = rom.o m68ksim.o blocks.o sched.o
+SRCS = rom.cc m68ksim.cc blocks.cc sched.cc
 JUNK =
 
 OPT=-O9
@@ -40,6 +40,7 @@ distclean:
 	rm -f ${PROG} ${OBJS} ${JUNK}
 
 ###
+rom.o: blocks.h state.h
 m68ksim.o: blocks.h state.h sched.h
 blocks.o: blocks.h state.h
-sched.o: sched.h state.h blocks.h
+sched.o: sched.h state.h blocks.h rom.h

@@ -1,5 +1,6 @@
 #include "sched.h"
 #include "blocks.h"
+#include "rom.h"
 
 #define T(c) r.c != s.c
 
@@ -11,4 +12,6 @@ void compute_sched(const cstate &r, const cstate &s, std::list<void (*)(cstate &
     f.push_back(eclk);     
   if(first || T(n148) || T(bus_error_1) || T(n1569) || T(internal_halt) || T(internal_reset) || T(n1361) || T(clk) || T(berro) || T(n2735) || T(iclk))
     f.push_back(eu_timing);
+  if(first || T(romarray_precharge) || T(marom) || T(romarray_clear) || T(eu_w))
+    f.push_back(rom);
 }

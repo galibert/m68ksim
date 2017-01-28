@@ -34,7 +34,9 @@ struct cstate {
 
   bool n148, n1569, n2703, n2735, n2772, n2781, n1932, n2079, n2172, n2350, n1852, n2493;
 
-  
+  u16 marom;
+  u32 r_micro, r_nano1, r_nano2, r_nano3;
+  u32 l_micro, l_nano1, l_nano2, l_nano3;
 };
 
 #endif

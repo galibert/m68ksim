@@ -33,11 +33,17 @@ void update(cstate &s)
 
 void show_state(const cstate &s)
 {
-  printf("%8ld: clk=%d iclk=%d i_reset=%d eu_prw=%c%c%c rpcg=%c%c\n",
+  printf("%8ld: clk=%d iclk=%d i_reset=%d eu_prw=%c%c%c rpcg=%c%c rmicro=%05x lmicro=%05x rnano=%x.%08x.%08x lnano=%x.%08x.%08x ma0=%03x ma1=%03x ma2=%03x ma3=%03x madr=%03x marom=%03x 2553=%d 2780=%d\n",
 	 s.ctime, s.clk, s.iclk,
 	 s.internal_reset,
 	 s.eu_p ? 'p' : '-', s.eu_r ? 'r' : '-', s.eu_w ? 'w' : '-',
-	 s.romarray_precharge ? 'p' : '-', s.romarray_clear ? 'c' : '-');
+	 s.romarray_precharge ? 'p' : '-', s.romarray_clear ? 'c' : '-',
+	 s.r_micro^0x1ffff, s.l_micro,
+	 s.r_nano1^0xf, ~s.r_nano2, ~s.r_nano3,
+	 s.l_nano1, s.l_nano2, s.l_nano3,
+	 s.ma0, s.ma1, s.ma2, s.ma3, s.madr^0x3ff, s.marom,
+	 s.n2553, s.n2780
+	 );
 }
 
 void step(cstate &s, bool verbose)

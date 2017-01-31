@@ -14,4 +14,6 @@ void compute_sched(const cstate &r, const cstate &s, std::list<void (*)(cstate &
     f.push_back(eu_timing);
   if(first || T(romarray_precharge) || T(marom) || T(romarray_clear) || T(eu_w))
     f.push_back(rom);
+  if(first || T(address_drive) || T(iclk) || T(clk) || T(interrupt_bus_cycle) || T(berro) || T(aob_active) || T(internal_reset) || T(eu_w) || T(eu_p) || T(eu_r) || T(n461) || T(n7809) || T(priviledge_violation) || T(illegal_instruction) || T(linea) || T(linef) || T(n2082) || T(address_error) || T(ma1) || T(ma2) || T(ma3) || T(l_micro) || T(romarray_precharge) || T(romarray_clear) || T(cc2) || T(cc3))
+    f.push_back(ma);
 }

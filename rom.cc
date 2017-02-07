@@ -162,7 +162,7 @@ void rom(cstate &s)
   } else if(s.eu_w) {
     s.l_micro = s.r_micro ^ 0x1807f;
     s.l_nano1 = s.r_nano1;
-    s.l_nano2 = s.r_nano2 ^ 0x82ffffc2;
+    s.l_nano2 = s.r_nano2 ^ 0x82feffc2;
     s.l_nano3 = s.r_nano3 ^ 0x1ffd7d7e;
   }
 }

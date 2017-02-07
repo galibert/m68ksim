@@ -160,7 +160,7 @@ void ma(cstate &s)
     s.n1997 = s.n1926 && !s.internal_reset;
 
   if(s.iclk)
-    s.n2082 = !s.n1997;
+    s.excp_2 = !s.n1997;
 
   bool n2300 = !(s.address_error || s.bus_error_1);
   bool n2368 = !n2300;
@@ -177,8 +177,8 @@ void ma(cstate &s)
 
   if(n6518)
     s.excpla = (s.excpla & 0x01f)
-      | (s.n461                 ? 0x400 : 0)
-      | (s.n7809                ? 0x200 : 0)
+      | (s.excp_1               ? 0x400 : 0)
+      | (s.trace                ? 0x200 : 0)
       | (s.priviledge_violation ? 0x100 : 0)
       | (s.illegal_instruction  ? 0x080 : 0)
       | (s.linea                ? 0x040 : 0)
@@ -186,9 +186,9 @@ void ma(cstate &s)
 
   if(n6656)
     s.excpla = (s.excpla & 0x7e0)
-      | (s.n2082                ? 0x010 : 0)
+      | (s.excp_2               ? 0x010 : 0)
       | (s.bus_error_1          ? 0x008 : 0)
-      | (s.n1627                ? 0x004 : 0)
+      | (s.excp_3               ? 0x004 : 0)
       | (s.bus_error_2          ? 0x002 : 0)
       | (s.address_error        ? 0x001 : 0);
 
@@ -234,7 +234,7 @@ void ma(cstate &s)
   bool n2314 = !(n2300 || n2333);
 
   if(s.romarray_clear) {
-    s.n2553 = s.n2082;
+    s.n2553 = s.excp_2;
     s.n2648 = n2368 && !s.n2553;
     s.n2780 = n2314 && !s.n2553;
   } else if(s.eu_w)
